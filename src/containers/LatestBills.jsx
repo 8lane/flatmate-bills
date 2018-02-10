@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { Creators } from '../actions';
 
-import { Name, Price } from '../components'
+import { DeleteBtn, BillPrice, BillSegment, BillTitle } from '../components'
 
 const LatestBills = ({ latestBills, flatmates, onBillDelete, onToggleSegmentPaid }) => {
   return (
@@ -11,35 +11,35 @@ const LatestBills = ({ latestBills, flatmates, onBillDelete, onToggleSegmentPaid
       {latestBills && latestBills.map((bill) => {
         return (
           <li key={bill.id}>
+            <BillTitle title={bill.name} />
+
             <h3>
-              {bill.name}
-              &nbsp;
               Total:
-              <Price total={bill.price} />
+              <BillPrice total={bill.price} />
               &nbsp;
               Transferred:
-              <Price total={!bill.segmentsIsPaid ? bill.segmentsCurrentBalance : bill.price} />
-
-              <button type="button" onClick={() => onBillDelete(bill.id)}>
-                &times;
-              </button>
+              <BillPrice total={!bill.segmentsIsPaid ? bill.segmentsCurrentBalance : bill.price} />
+              &nbsp;
+              <DeleteBtn onDelete={() => onBillDelete(bill.id)} />
             </h3>
 
-            {bill.segments.map(segment => {
-              const { firstName, lastName } = flatmates[segment.flatmateId]
+            <ul>
+              {bill.segments.map(segment => {
+                const { firstName, lastName } = flatmates[segment.flatmateId]
 
-              return (
-                <p key={segment.flatmateId} style={{ textDecoration: segment.isPaid ? 'line-through' : 'none' }}>
-                  <Name firstName={firstName} lastName={lastName} />
-                  &nbsp;
-                  <Price total={segment.price} />
-                  &nbsp;
-                  <button onClick={() => onToggleSegmentPaid(bill.id, segment.flatmateId)}>
-                    {segment.isPaid ? '×' : '✓'}
-                  </button>
-                </p>
-              )
-            })}
+                return <BillSegment {...{
+                  key: segment.flatmateId,
+                  firstName,
+                  lastName,
+                  segment,
+                  onToggleSegmentPaid: e => {
+                    e.preventDefault()
+                    onToggleSegmentPaid(bill.id, segment.flatmateId)
+                  }
+                }} />
+
+              })}
+            </ul>
 
           </li>
         )
