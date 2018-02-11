@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Name } from '../components';
+import { Name } from '../../components';
 
 describe('When displaying a flatmate name', () => {
   let NameComponent

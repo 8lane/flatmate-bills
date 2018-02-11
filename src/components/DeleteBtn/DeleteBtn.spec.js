@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { DeleteBtn } from '../components';
+import { DeleteBtn } from '../../components';
 
 describe('When displaying a delete button', () => {
   let DeleteBtnComponent

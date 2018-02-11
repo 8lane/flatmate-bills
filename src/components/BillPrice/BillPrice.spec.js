@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { BillPrice } from '../components';
+import { BillPrice } from '../../components';
 
 describe('When displaying the bill price', () => {
   let BillPriceComponent

@@ -9,9 +9,23 @@
 
 @media only screen and (min-width: 600px) {
   .app-container {
-    max-width: 600px;
+    max-width: 650px;
     margin: 4rem auto;
   }
+}
+
+.bill-date__from {
+  padding-right: 4px;
+}
+
+.bill-date__to {
+  padding-left: 4px;
+}
+
+.latest-bills__date {
+  margin-left: .5rem;
+  color: #b4bdc5;
+  font-weight: 200;
 }
 
 .bill-segment {
