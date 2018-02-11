@@ -1,3 +1,47 @@
 * {
   box-sizing: border-box;
 }
+
+.app-container {
+  min-width: 320px;
+  padding: 1rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .app-container {
+    max-width: 600px;
+    margin: 4rem auto;
+  }
+}
+
+.bill-segment {
+  margin-top: 0;
+}
+
+.bill-segment__link {
+  display: block;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.bill-segment__link:hover {
+  text-decoration: line-through;
+}
+
+.bill-segment__price {
+  background: #f2f4f5;
+  padding: 4px 10px;
+  color: #333b44;
+  border-radius: 55px;
+  min-width: 80px;
+  display: inline-block;
+  text-align: center;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.bill-segment__price--success {
+  background: #009688;
+  color: white;
+}

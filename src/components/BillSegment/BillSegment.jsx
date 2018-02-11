@@ -6,16 +6,17 @@ const BillSegment = ({ firstName, lastName, segment, price, onToggleSegmentPaid 
 
   return (
     <li
+      className="bill-segment"
       style={{ textDecoration: segment.isPaid ? 'line-through' : 'none' }}
     >
-      <a href="#" onClick={onToggleSegmentPaid}>
-        <Name firstName={firstName} lastName={lastName} />
-        &nbsp;
-        <BillPrice total={segment.price} />
-        &nbsp;
-        <span>
-          {segment.isPaid ? '×' : '✓'}
-        </span>
+      <a className="bill-segment__link" href="#" onClick={onToggleSegmentPaid}>
+        {segment.isPaid ?
+          <span className="bill-segment__price bill-segment__price--success" uk-icon="icon: check; ratio: 1.2" />
+        :
+          <BillPrice className="bill-segment__price" total={segment.price} />
+        }
+
+        <Name className="bill-segment__name" firstName={firstName} lastName={lastName} />
       </a>
     </li>
   )

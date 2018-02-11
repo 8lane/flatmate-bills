@@ -13,29 +13,28 @@ const LatestBills = ({ latestBills, flatmates, onBillDelete, onToggleSegmentPaid
           <li key={bill.id} className="uk-margin-top uk-margin-bottom">
             <BillTitle title={bill.name} />
 
-            <div className="uk-display-inline-block">
+            <div className="uk-display-inline-block uk-h3 uk-align-right uk-margin-remove">
 
             {!bill.segmentsIsPaid ?
-              <div className="uk-display-inline-block">
+              <div>
                 <BillPrice
-                  className="uk-label uk-label-danger"
-                  total={bill.price}
+                  className=""
+                  total={bill.segmentsCurrentBalance}
                 />
-
-                &nbsp;
-
+                &nbsp;/&nbsp;
                 <BillPrice
-                  className="uk-label uk-label-warning"
-                  total={!bill.segmentsIsPaid ? bill.segmentsCurrentBalance : bill.price}
+                  className=""
+                  total={bill.price}
                 />
               </div>
             :
-              <span className="uk-label uk-label-success">Paid</span>
+              <span className="uk-h3 uk-margin-remove">Paid</span>
             }
-              &nbsp;
+
+              {/* &nbsp;
               <DeleteBtn
                 onDelete={() => onBillDelete(bill.id)}
-              />
+              /> */}
             </div>
 
             <ul className="uk-list uk-padding-remove-left">
