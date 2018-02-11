@@ -1,7 +1,7 @@
-import LatestBills from './LatestBills'
-import NewBillForm from './NewBillForm'
+import LatestBills from './LatestBills/LatestBills'
+import BillFormNew from './BillFormNew/BillFormNew'
 
 export {
   LatestBills,
-  NewBillForm
+  BillFormNew
 }

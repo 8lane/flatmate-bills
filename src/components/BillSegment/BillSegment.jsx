@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BillPrice, Name } from '../components'
+import { BillPrice, Name } from '../../components'
 
 const BillSegment = ({ firstName, lastName, segment, price, onToggleSegmentPaid }) => {
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LatestBills, NewBillForm } from './containers'
+import { LatestBills, BillFormNew } from './containers'
 
 window.moment = require('moment')
 
@@ -10,7 +10,7 @@ class App extends React.Component {
       <div>
         <h1>Flatmate Bills</h1>
         <LatestBills />
-        <NewBillForm />
+        <BillFormNew />
       </div>
     )
   }

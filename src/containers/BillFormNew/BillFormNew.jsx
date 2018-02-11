@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { Creators } from '../actions';
+import { Creators } from '../../actions';
 
 class NewBillForm extends React.Component {
   constructor(props) {

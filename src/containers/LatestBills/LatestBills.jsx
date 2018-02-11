@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { Creators } from '../actions';
+import { Creators } from '../../actions';
 
-import { DeleteBtn, BillPrice, BillSegment, BillTitle } from '../components'
+import { DeleteBtn, BillPrice, BillSegment, BillTitle } from '../../components'
 
 const LatestBills = ({ latestBills, flatmates, onBillDelete, onToggleSegmentPaid }) => {
   return (
