@@ -1,6 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+
+import { DateRangePicker } from 'react-dates';
+
 import { Creators } from '../../actions';
 
 class NewBillForm extends React.Component {
@@ -8,7 +13,10 @@ class NewBillForm extends React.Component {
     super(props)
 
     this.state = {
-      newBill: null
+      newBill: null,
+      focusedInput: null,
+      startDate: moment(),
+      endDate: null
     }
   }
 
@@ -76,6 +84,16 @@ class NewBillForm extends React.Component {
                 }}
               />
             </p>
+
+            <DateRangePicker
+              startDate={this.state.startDate}
+              startDateId="your_unique_start_date_id"
+              endDate={this.state.endDate}
+              endDateId="your_unique_end_date_id"
+              focusedInput={this.state.focusedInput}
+              onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })}
+              onFocusChange={focusedInput => this.setState({ focusedInput })}
+            />
 
             <p>
               <input
