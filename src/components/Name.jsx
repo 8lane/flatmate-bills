@@ -2,7 +2,7 @@ import React from 'react'
 
 const Name = ({ firstName, lastName }) => {
   return (
-    <strong>{firstName} {lastName}</strong>
+    <strong className="name">{firstName} {lastName}</strong>
   )
 }
 

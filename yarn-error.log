@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add @babel/react --save-dev
+  /usr/local/bin/node /usr/local/bin/yarn add jest @babel/preset-jest react-test-renderer
 
 PATH: 
   /usr/local/Cellar/ruby/2.4.1_1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/tomchristian/.rvm/bin:/Users/tomchristian/.rvm/bin
@@ -21,17 +21,24 @@ npm manifest:
     "author": "Tom Christian",
     "license": "MIT",
     "scripts": {
-      "dev": "webpack --watch"
+      "build": "webpack",
+      "dev": "webpack-dev-server"
     },
     "dependencies": {
       "@babel/core": "^7.0.0-beta.39",
       "@babel/preset-env": "^7.0.0-beta.39",
+      "@babel/preset-react": "^7.0.0-beta.39",
       "babel-cli": "^6.26.0",
       "babel-loader": "8.0.0-beta.0",
       "babel-plugin-transform-object-rest-spread": "^6.26.0",
       "babel-preset-react": "^6.24.1",
+      "moment": "^2.20.1",
       "react": "^16.2.0",
       "react-dom": "^16.2.0",
+      "react-redux": "^5.0.6",
+      "redux": "^3.7.2",
+      "reduxsauce": "^0.7.0",
+      "seamless-immutable": "^7.1.3",
       "webpack": "^3.10.0",
       "webpack-dev-server": "^2.11.1"
     }
@@ -94,6 +101,13 @@ Lockfile:
     dependencies:
       "@babel/helper-explode-assignable-expression" "7.0.0-beta.39"
       "@babel/types" "7.0.0-beta.39"
+  
+  "@babel/helper-builder-react-jsx@7.0.0-beta.39":
+    version "7.0.0-beta.39"
+    resolved "https://registry.yarnpkg.com/@babel/helper-builder-react-jsx/-/helper-builder-react-jsx-7.0.0-beta.39.tgz#ccac98469704b15c27ef0752bb125aec900c405a"
+    dependencies:
+      "@babel/types" "7.0.0-beta.39"
+      esutils "^2.0.0"
   
   "@babel/helper-call-delegate@7.0.0-beta.39":
     version "7.0.0-beta.39"
@@ -241,6 +255,10 @@ Lockfile:
     version "7.0.0-beta.39"
     resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-async-generators/-/plugin-syntax-async-generators-7.0.0-beta.39.tgz#ace93b8bb53e256a330b21d78304843fd6d72ab4"
   
+  "@babel/plugin-syntax-jsx@7.0.0-beta.39":
+    version "7.0.0-beta.39"
+    resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-jsx/-/plugin-syntax-jsx-7.0.0-beta.39.tgz#c7f0d1a7e6bbe503a814a265d7d7322f2b230bf6"
+  
   "@babel/plugin-syntax-object-rest-spread@7.0.0-beta.39":
     version "7.0.0-beta.39"
     resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-object-rest-spread/-/plugin-syntax-object-rest-spread-7.0.0-beta.39.tgz#f19f0761ccebf1d579197705e2efda36e1a45545"
@@ -362,6 +380,29 @@ Lockfile:
       "@babel/helper-call-delegate" "7.0.0-beta.39"
       "@babel/helper-get-function-arity" "7.0.0-beta.39"
   
+  "@babel/plugin-transform-react-display-name@7.0.0-beta.39":
+    version "7.0.0-beta.39"
+    resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-display-name/-/plugin-transform-react-display-name-7.0.0-beta.39.tgz#450f3ff1e42761af45119888d9c32c6cc54ad091"
+  
+  "@babel/plugin-transform-react-jsx-self@7.0.0-beta.39":
+    version "7.0.0-beta.39"
+    resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx-self/-/plugin-transform-react-jsx-self-7.0.0-beta.39.tgz#ad2f4f357b5be61929d989b5be60dac943e8434a"
+    dependencies:
+      "@babel/plugin-syntax-jsx" "7.0.0-beta.39"
+  
+  "@babel/plugin-transform-react-jsx-source@7.0.0-beta.39":
+    version "7.0.0-beta.39"
+    resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx-source/-/plugin-transform-react-jsx-source-7.0.0-beta.39.tgz#632decbb1ad66592a3fae6cac3103b820bc89877"
+    dependencies:
+      "@babel/plugin-syntax-jsx" "7.0.0-beta.39"
+  
+  "@babel/plugin-transform-react-jsx@7.0.0-beta.39":
+    version "7.0.0-beta.39"
+    resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx/-/plugin-transform-react-jsx-7.0.0-beta.39.tgz#43157bc2274fa3b6925f67ae1ccec03f9421432f"
+    dependencies:
+      "@babel/helper-builder-react-jsx" "7.0.0-beta.39"
+      "@babel/plugin-syntax-jsx" "7.0.0-beta.39"
+  
   "@babel/plugin-transform-regenerator@7.0.0-beta.39":
     version "7.0.0-beta.39"
     resolved "https://registry.yarnpkg.com/@babel/plugin-transform-regenerator/-/plugin-transform-regenerator-7.0.0-beta.39.tgz#6f85c3ac987824fe037fc83dcda75c4d7502344c"
@@ -440,6 +481,16 @@ Lockfile:
       browserslist "^2.4.0"
       invariant "^2.2.2"
       semver "^5.3.0"
+  
+  "@babel/preset-react@^7.0.0-beta.39":
+    version "7.0.0-beta.39"
+    resolved "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.0.0-beta.39.tgz#e2ee52660233016c05fc1f211ab20d1141e848d0"
+    dependencies:
+      "@babel/plugin-syntax-jsx" "7.0.0-beta.39"
+      "@babel/plugin-transform-react-display-name" "7.0.0-beta.39"
+      "@babel/plugin-transform-react-jsx" "7.0.0-beta.39"
+      "@babel/plugin-transform-react-jsx-self" "7.0.0-beta.39"
+      "@babel/plugin-transform-react-jsx-source" "7.0.0-beta.39"
   
   "@babel/template@7.0.0-beta.39":
     version "7.0.0-beta.39"
@@ -1746,7 +1797,7 @@ Lockfile:
     version "4.2.0"
     resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
   
-  esutils@^2.0.2:
+  esutils@^2.0.0, esutils@^2.0.2:
     version "2.0.2"
     resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
   
@@ -2248,6 +2299,10 @@ Lockfile:
     version "2.16.3"
     resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
   
+  hoist-non-react-statics@^2.2.1:
+    version "2.3.1"
+    resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.3.1.tgz#343db84c6018c650778898240135a1420ee22ce0"
+  
   home-or-tmp@^2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/home-or-tmp/-/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
@@ -2371,7 +2426,7 @@ Lockfile:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.1.0.tgz#7ed1b1410c6a0e0f78cf95d3b8440c63f78b8614"
   
-  invariant@^2.2.0, invariant@^2.2.2:
+  invariant@^2.0.0, invariant@^2.2.0, invariant@^2.2.2:
     version "2.2.2"
     resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
     dependencies:
@@ -2763,7 +2818,11 @@ Lockfile:
       p-locate "^2.0.0"
       path-exists "^3.0.0"
   
-  lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0:
+  lodash-es@^4.2.0, lodash-es@^4.2.1:
+    version "4.17.5"
+    resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.5.tgz#9fc6e737b1c4d151d8f9cae2247305d552ce748f"
+  
+  lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1:
     version "4.17.5"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
   
@@ -2961,6 +3020,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
     dependencies:
       minimist "0.0.8"
+  
+  moment@^2.20.1:
+    version "2.20.1"
+    resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
   
   ms@2.0.0:
     version "2.0.0"
@@ -3394,7 +3457,7 @@ Lockfile:
     dependencies:
       asap "~2.0.3"
   
-  prop-types@^15.6.0:
+  prop-types@^15.5.10, prop-types@^15.6.0:
     version "15.6.0"
     resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
     dependencies:
@@ -3459,6 +3522,16 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-1.0.0.tgz#6286242112c5b712fa654e526652bf6a13ff05cb"
   
+  ramda@^0.24.1:
+    version "0.24.1"
+    resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.24.1.tgz#c3b7755197f35b8dc3502228262c4c91ddb6b857"
+  
+  ramdasauce@^2.0.0:
+    version "2.1.0"
+    resolved "https://registry.yarnpkg.com/ramdasauce/-/ramdasauce-2.1.0.tgz#65ea157a9cfc17841a7dd6499d3f9f421dc2eb36"
+    dependencies:
+      ramda "^0.24.1"
+  
   randomatic@^1.1.3:
     version "1.1.7"
     resolved "https://registry.yarnpkg.com/randomatic/-/randomatic-1.1.7.tgz#c7abe9cc8b87c0baa876b19fde83fd464797e38c"
@@ -3509,6 +3582,17 @@ Lockfile:
       loose-envify "^1.1.0"
       object-assign "^4.1.1"
       prop-types "^15.6.0"
+  
+  react-redux@^5.0.6:
+    version "5.0.6"
+    resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.6.tgz#23ed3a4f986359d68b5212eaaa681e60d6574946"
+    dependencies:
+      hoist-non-react-statics "^2.2.1"
+      invariant "^2.0.0"
+      lodash "^4.2.0"
+      lodash-es "^4.2.0"
+      loose-envify "^1.1.0"
+      prop-types "^15.5.10"
   
   react@^16.2.0:
     version "16.2.0"
@@ -3576,6 +3660,23 @@ Lockfile:
     dependencies:
       indent-string "^2.1.0"
       strip-indent "^1.0.1"
+  
+  redux@^3.7.1, redux@^3.7.2:
+    version "3.7.2"
+    resolved "https://registry.yarnpkg.com/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
+    dependencies:
+      lodash "^4.2.1"
+      lodash-es "^4.2.1"
+      loose-envify "^1.1.0"
+      symbol-observable "^1.0.3"
+  
+  reduxsauce@^0.7.0:
+    version "0.7.0"
+    resolved "https://registry.yarnpkg.com/reduxsauce/-/reduxsauce-0.7.0.tgz#f482377fd9f5095384ec6b247902eae06712c59b"
+    dependencies:
+      ramda "^0.24.1"
+      ramdasauce "^2.0.0"
+      redux "^3.7.1"
   
   regenerate-unicode-properties@^5.1.1:
     version "5.1.3"
@@ -3733,6 +3834,10 @@ Lockfile:
   safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
     version "5.1.1"
     resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
+  
+  seamless-immutable@^7.1.3:
+    version "7.1.3"
+    resolved "https://registry.yarnpkg.com/seamless-immutable/-/seamless-immutable-7.1.3.tgz#d32a8a202a331dffa69e4069a367a2159252490e"
   
   select-hose@^2.0.0:
     version "2.0.0"
@@ -4100,6 +4205,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-5.1.0.tgz#058a021d1b619f7ddf3980d712ea3590ce7de3d5"
     dependencies:
       has-flag "^2.0.0"
+  
+  symbol-observable@^1.0.3:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
   
   tapable@^0.2.7:
     version "0.2.8"
@@ -4576,7 +4685,7 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: https://registry.npmjs.org/@babel%2freact: Not found
+  Error: https://registry.npmjs.org/@babel%2fpreset-jest: Not found
       at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/util/request-manager.js:313:18)
       at Request.self.callback (/usr/local/lib/node_modules/yarn/node_modules/request/request.js:188:22)
       at emitTwo (events.js:135:13)
