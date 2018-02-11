@@ -8,7 +8,6 @@ import { round, calculatePricePerDay } from '../helpers/Prices'
 import { getDaysBetweenDates } from '../helpers/Dates'
 
 export const INITIAL_STATE = Immutable({
-  newBillPending: false,
   latestBills: [...mockBills]
 })
 
@@ -46,10 +45,7 @@ const toggleSegmentPaid = (state, action) => state.merge({
   })
 })
 
-
-const setNewBillPending = (state, action) => state.merge({ newBillEditing: action.payload })
-
-const addBill = (state, action) => state.merge({
+const saveNewBill = (state, action) => state.merge({
   latestBills: [
     ...state.latestBills,
     {
@@ -65,7 +61,7 @@ const addBill = (state, action) => state.merge({
       segmentsIsPaid: false,
       segmentsCurrentBalance: 0,
       segments: [],
-      ...action.payload
+      ...action.newBill
     }
   ]
 })
@@ -76,8 +72,7 @@ const deleteBill = (state, action) => state.merge({
 
 const ACTION_HANDLERS = {
   [Types.TOGGLE_SEGMENT_PAID]: toggleSegmentPaid,
-  [Types.SET_NEW_BILL_EDITING]: setNewBillPending,
-  [Types.ADD_BILL]: addBill,
+  [Types.SAVE_NEW_BILL]: saveNewBill,
   [Types.DELETE_BILL]: deleteBill
 }
 
