@@ -69,111 +69,158 @@ class NewBillForm extends React.Component {
     
     return (
       <div>
-        
-        <button onClick={() => onToggleVisibility(!isEditing) }>
-          {!isEditing ? 'New Bill +' : 'x'}
-        </button>
+        {!isEditing &&
+          <button
+            className="uk-button uk-button-primary uk-button-large"
+            onClick={() => onToggleVisibility(!isEditing)}
+          >
+            Create new bill
+          </button>
+        }
 
         {isEditing ?
           <form onSubmit={this.handleSubmit}>
-            <p>
+            <h1>Create new bill</h1>
+
+            <fieldset className="uk-fieldset uk-margin">
+              <h4>What kind of bill is it?</h4>
               <input
-                placeholder="Bill Name"
+                className="uk-input uk-form-large"
+                placeholder="e.g. Council Tax"
                 type="text"
                 value={newBill.name}
                 onChange={e => onChangeValue('name', e.target.value)}
               />
-            </p>
+            </fieldset>
 
-            <p>
+            <fieldset className="uk-fieldset uk-margin">
+              <h4>How much does it cost?</h4>
               <input
-                placeholder="Bill Price"
+                className="uk-input uk-form-large"
+                placeholder="e.g. £65.12"
                 type="number"
                 value={newBill.price}
                 onChange={e => onChangeValue('price', e.target.value)}
               />
-            </p>
+            </fieldset>
 
-            <p>
+            <fieldset className="uk-fieldset uk-margin">
+              <h4>Which flatmate is managing it?</h4>
               <select
-                placeholder="Bill Owner"
+                className="uk-select uk-form-large"
+                placeholder="e.g. Antonio Conte"
                 type="text"
                 value={newBill.flatmateOwner}
                 onChange={e => onChangeValue('flatmateOwner', e.target.value)}
               >
+                <option value="" selected disabled hidden>Choose a flatmate</option>
                 {Object.keys(flatmates).map(id =>
                   <option key={id} value={id}>{flatmates[id].firstName} {flatmates[id].lastName}</option>
                 )}
               </select>
-            </p>
+            </fieldset>
 
-            <DateRangePicker
-              startDate={newBill.dateFrom}
-              startDateId="your_unique_start_date_id"
-              endDate={newBill.dateTo}
-              endDateId="your_unique_end_date_id"
-              focusedInput={this.state.focusedInput}
-              onDatesChange={({ startDate, endDate }) => {
-                onChangeValue('dateFrom', startDate)
-                onChangeValue('dateTo', endDate)
-              }}
-              onFocusChange={focusedInput => this.setState({ focusedInput })}
-            />
+            <fieldset className="uk-fieldset uk-margin">
+              <h4>What date range does it cover?</h4>
+              <DateRangePicker
+                startDate={newBill.dateFrom}
+                startDateId="your_unique_start_date_id"
+                endDate={newBill.dateTo}
+                endDateId="your_unique_end_date_id"
+                focusedInput={this.state.focusedInput}
+                onDatesChange={({ startDate, endDate }) => {
+                  onChangeValue('dateFrom', startDate)
+                  onChangeValue('dateTo', endDate)
+                }}
+                onFocusChange={focusedInput => this.setState({ focusedInput })}
+              />
+            </fieldset>
 
-            <div>
-              <h4>Add bill contributors
+            <fieldset className="uk-fieldset uk-margin">
+              <h4>Who's contributing to it?
 
-                {newBill.segments.length > 1 &&
-                  <label>
-                    &nbsp;&ndash;
-                    Equally split?
-                    <input
-                      type="checkbox"
-                      checked={equalSegmentSplit}
-                      onChange={e => onToggleEqualSplit()}
-                    />
-                  </label>
-                }
+              {newBill.segments.length > 1 &&
+                <label>
+                  &nbsp;&ndash;
+                  Is it equally split?
+                  &nbsp;
+                  <input
+                    className="uk-checkbox"
+                    type="checkbox"
+                    checked={equalSegmentSplit}
+                    onChange={e => onToggleEqualSplit()}
+                  />
+                </label>
+              }
               </h4>
 
-              <br/><br/>
+              <fieldset className="uk-fieldset uk-margin">
+                {Object.keys(flatmates).map(id =>
+                  <label key={id} className="uk-display-block uk-margin-bottom">        
+                    <input
+                      ref={`contributor${id}`}
+                      className="uk-checkbox"
+                      type="checkbox"
+                      name="segments"
+                      value={id}
+                      onChange={this.handleContributor}
+                    />
 
-              {Object.keys(flatmates).map(id =>
-                <label key={id}>
-                  {flatmates[id].firstName} {flatmates[id].lastName}
-                  <input ref={`contributor${id}`} type="checkbox" name="segments" value={id} onChange={this.handleContributor} />
+                    <span>&nbsp;{flatmates[id].firstName} {flatmates[id].lastName}</span>
 
-                  {!equalSegmentSplit && this.refs[`contributor${id}`].checked ?
-                    <input type="number" placeholder="Days owed" onChange={evt => onUpdateSegmentDaysOwed(evt.target.value, id)} />
-                    : null
-                  }
-                  <br /><br />
-                </label>
-              )}
-            </div>
+                    {!equalSegmentSplit && this.refs[`contributor${id}`].checked ?
+                      <input
+                        className="uk-input uk-form-large uk-margin-top"
+                        type="number"
+                        placeholder="Days owed"
+                        onChange={evt => onUpdateSegmentDaysOwed(evt.target.value, id)}
+                      />
+                      : null
+                    }
+                  </label>
+                )}
+              </fieldset>
+
+            </fieldset>
       
-
-
-            <p>
-              Already paid? 
-              <input
-                type="checkbox"
-                onChange={e => onChangeValue('archived', !newBill.archived)}
-              />
-            </p>
+            {/* <fieldset className="uk-fieldset uk-margin">
+              <h4>Has the bill been already paid?</h4>
+              <label>
+                <input
+                  className="uk-checkbox"
+                  type="checkbox"
+                  onChange={e => onChangeValue('archived', !newBill.archived)}
+                />
+                &nbsp; Already paid? 
+              </label>
+            </fieldset>
 
             {newBill && newBill.archived ?
-              <SingleDatePicker
-                date={newBill.datePaid}
-                onDateChange={datePaid => onChangeValue('datePaid', datePaid)}
-                focused={this.state.focused}
-                onFocusChange={({ focused }) => this.setState({ focused })}
-              />
+              <fieldset className="uk-fieldset uk-margin">
+                <SingleDatePicker
+                  date={newBill.datePaid}
+                  onDateChange={datePaid => onChangeValue('datePaid', datePaid)}
+                  focused={this.state.focused}
+                  onFocusChange={({ focused }) => this.setState({ focused })}
+                />
+              </fieldset>
               : null
-            }
+            } */}
 
+            <button
+              className="uk-button uk-button-primary uk-button-large"
+              type="submit"
+            >
+              Save new bill
+            </button>
 
-            <button type="submit">Add bill +</button>
+            <button
+              className="uk-button uk-button-default uk-button-large uk-margin-left"
+              type="submit"
+              onClick={() => onToggleVisibility(!isEditing)}
+            >
+              Discard
+            </button>
           </form>
           : null
         }

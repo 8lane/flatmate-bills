@@ -7,23 +7,38 @@ import { DeleteBtn, BillPrice, BillSegment, BillTitle } from '../../components'
 
 const LatestBills = ({ latestBills, flatmates, onBillDelete, onToggleSegmentPaid }) => {
   return (
-    <ul>
+    <ul className="uk-list uk-list-large">
       {latestBills && latestBills.map((bill) => {
         return (
-          <li key={bill.id}>
+          <li key={bill.id} className="uk-margin-top uk-margin-bottom">
             <BillTitle title={bill.name} />
 
-            <h3>
-              Total:
-              <BillPrice total={bill.price} />
-              &nbsp;
-              Transferred:
-              <BillPrice total={!bill.segmentsIsPaid ? bill.segmentsCurrentBalance : bill.price} />
-              &nbsp;
-              <DeleteBtn onDelete={() => onBillDelete(bill.id)} />
-            </h3>
+            <div className="uk-display-inline-block">
 
-            <ul>
+            {!bill.segmentsIsPaid ?
+              <div className="uk-display-inline-block">
+                <BillPrice
+                  className="uk-label uk-label-danger"
+                  total={bill.price}
+                />
+
+                &nbsp;
+
+                <BillPrice
+                  className="uk-label uk-label-warning"
+                  total={!bill.segmentsIsPaid ? bill.segmentsCurrentBalance : bill.price}
+                />
+              </div>
+            :
+              <span className="uk-label uk-label-success">Paid</span>
+            }
+              &nbsp;
+              <DeleteBtn
+                onDelete={() => onBillDelete(bill.id)}
+              />
+            </div>
+
+            <ul className="uk-list uk-padding-remove-left">
               {bill.segments.map(segment => {
                 const { firstName, lastName } = flatmates[segment.flatmateId]
 
