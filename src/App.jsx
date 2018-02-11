@@ -1,6 +1,8 @@
 import React from 'react'
 import 'uikit/dist/css/uikit.css'
 
+import './App.css'
+
 import { LatestBills, BillFormNew } from './containers'
 
 window.moment = require('moment')

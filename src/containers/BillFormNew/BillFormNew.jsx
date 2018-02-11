@@ -123,6 +123,8 @@ class NewBillForm extends React.Component {
             <fieldset className="uk-fieldset uk-margin">
               <h4>What date range does it cover?</h4>
               <DateRangePicker
+                block={true}
+                isOutsideRange={() => false}
                 startDate={newBill.dateFrom}
                 startDateId="your_unique_start_date_id"
                 endDate={newBill.dateTo}
@@ -133,6 +135,7 @@ class NewBillForm extends React.Component {
                   onChangeValue('dateTo', endDate)
                 }}
                 onFocusChange={focusedInput => this.setState({ focusedInput })}
+                displayFormat="DD-MM-YYYY"
               />
             </fieldset>
 
