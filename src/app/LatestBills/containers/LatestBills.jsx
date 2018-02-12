@@ -14,16 +14,14 @@ import {
 } from '../../Common'
 
 class LatestBills extends React.Component {
-  componentDidMount() {
-    //this.props.getFlatmates()
-  }
-
   render() {
     const { latestBills, flatmates, onBillDelete, onToggleSegmentPaid } = this.props
 
+    const sortedBills = [].concat(latestBills).sort((a, b) => a.id < b.id)
+
     return (
       <ul className="latest-bills uk-list uk-list-large">
-        {latestBills && latestBills.map((bill) => {
+        {latestBills && sortedBills.map((bill) => {
           return (
             <li key={bill.id} className="uk-margin-top uk-margin-bottom">
               <BillTitle title={bill.name} />

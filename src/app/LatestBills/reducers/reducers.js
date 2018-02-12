@@ -15,17 +15,6 @@ const saveNewBill = (state, action) => state.merge({
     ...state.latestBills,
     {
       id: state.latestBills.length + 1,
-      name: null,
-      flatmateOwner: 0,
-      price: 0,
-      dateFrom: null,
-      dateTo: null,
-      datePaid: null,
-      archived: false,
-      numberOfSplitSegments: 0,
-      segmentsIsPaid: false,
-      segmentsCurrentBalance: 0,
-      segments: [],
       ...action.newBill
     }
   ]

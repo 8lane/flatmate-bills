@@ -8,6 +8,8 @@ import Icons from 'uikit/dist/js/uikit-icons';
 import 'uikit/dist/css/uikit.css'
 import './App.css'
 
+import { Creators as BillFormNewCreators } from './BillFormNew/actions/actions';
+
 import { LatestBills } from './LatestBills/containers'
 import { BillFormNew } from './BillFormNew/containers'
 
@@ -20,6 +22,7 @@ UIkit.use(Icons);
 
 class App extends React.Component {
   componentDidMount() {
+
     // firebase.database().ref('bills').set(require('../mocks/bills').default)
     // firebase.database().ref('flatmates').set(require('../mocks/flatmates').default)
     this.props.getFlatmates()
@@ -29,17 +32,39 @@ class App extends React.Component {
   render() {
     return (
       <div className="app-container">
-        <h1 className="uk-margin-top">🏠 25 Northways Bills</h1>
-        <LatestBills />
-        <BillFormNew />
+        <h1 className="uk-margin-top">
+          {!this.props.isEditing ? '🏠 25 Northways Bills' : '💸 Create new bill' }
+
+          <button
+            className="new-bill-btn uk-button uk-button-text uk-margin-remove-bottom uk-align-right"
+            onClick={() => this.props.onToggleVisibility(!this.props.isEditing)}
+          >
+            {!this.props.isEditing ?
+              <span uk-icon="icon: plus; ratio: 2"></span>
+            :
+              <span uk-icon="icon: close; ratio: 2"></span>
+            }
+          </button>
+        </h1>
+
+        {!this.props.isEditing ?
+          <LatestBills />
+        :
+          <BillFormNew />
+        }
       </div>
     )
   }
 }
 
 const mapDispatchToProps = dispatch => ({
+  onToggleVisibility: (editing) => dispatch(BillFormNewCreators.toggleNewFormVisibility(editing)),
   getFlatmates: () => dispatch(getFlatmates()),
   getBills: () => dispatch(getBills())
 });
 
-export default connect(null, mapDispatchToProps)(App)
+const mapStateToProps = state => ({
+  isEditing: state.BillFormNew.isEditing
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

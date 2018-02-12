@@ -3,7 +3,6 @@ import { Types } from '../actions/actions'
 
 export const INITIAL_STATE = {
   newBill: {
-    id: null,
     name: '',
     flatmateOwner: '',
     price: '',
@@ -60,7 +59,15 @@ const updateNewFormField = (state, action) => ({
 
 const clearNewForm = (state) => ({ ...state, newBill: INITIAL_STATE.newBill })
 
+const createBillAttempt = (state) => ({ ...state, creatingBill: true })
+const createBillSuccess = (state, action) => ({ ...state, creatingBill: false })
+const createBillFailure = (state, action) => ({ ...state, creatingBill: false, error: action.error })
+
 const ACTION_HANDLERS = {
+  [Types.CREATE_BILL_ATTEMPT]: createBillAttempt,
+  [Types.CREATE_BILL_SUCCESS]: createBillSuccess,
+  [Types.CREATE_BILL_FAILURE]: createBillFailure,
+
   [Types.TOGGLE_EQUAL_SEGMENT_SPLIT]: toggleEqualSegmentSplit,
   [Types.TOGGLE_NEW_FORM_VISIBILITY]: toggleNewFormVisibility,
   [Types.UPDATE_SEGMENT_DAYS_OWED]: updateSegmentDaysOwed,
