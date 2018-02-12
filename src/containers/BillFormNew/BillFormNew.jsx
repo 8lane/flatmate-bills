@@ -7,8 +7,8 @@ import 'react-dates/lib/css/_datepicker.css';
 
 import { SingleDatePicker, DateRangePicker } from 'react-dates';
 
-import { Creators } from './actions';
-import { Creators as LatestBillsCreators } from '../../actions';
+import { Creators } from './actions/actions';
+import { Creators as LatestBillsCreators } from '../LatestBills/actions/actions';
 
 class NewBillForm extends React.Component {
   constructor(props) {

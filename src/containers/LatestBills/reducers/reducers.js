@@ -1,11 +1,11 @@
 import Immutable from 'seamless-immutable'
 import { createReducer } from 'reduxsauce'
-import { Types } from '../actions'
+import { Types } from '../actions/actions'
 
-import mockBills from '../mocks/bills'
+import mockBills from '../../../mocks/bills'
 
-import { round, calculatePricePerDay } from '../helpers/Prices'
-import { getDaysBetweenDates } from '../helpers/Dates'
+import { round, calculatePricePerDay } from '../../../helpers/Prices'
+import { getDaysBetweenDates } from '../../../helpers/Dates'
 
 export const INITIAL_STATE = Immutable({
   latestBills: [...mockBills]

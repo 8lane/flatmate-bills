@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { Creators } from '../../actions';
+import { Creators } from './actions/actions';
 
 import { DeleteBtn, BillDate, BillPrice, BillSegment, BillTitle } from '../../components'
 
@@ -69,7 +69,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = (state, ownProps) => ({
-  latestBills: state.bills.latestBills,
+  latestBills: state.Bills.latestBills,
   flatmates: state.flatmates
 })
 

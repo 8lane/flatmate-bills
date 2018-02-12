@@ -1,13 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 
 import App from './App'
-import reducers from './reducers'
+
+import flatmates from './reducers/flatmates'
+import Bills from './containers/LatestBills/reducers/reducers'
+import BillFormNew from './containers/BillFormNew/reducers/reducers'
+
+const appReducer = combineReducers({
+  flatmates,
+  Bills,
+  BillFormNew
+})
 
 const store = createStore(
-  reducers,
+  appReducer,
   /* preloadedState, */
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )

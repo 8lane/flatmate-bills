@@ -1,5 +1,5 @@
 import { createReducer } from 'reduxsauce'
-import { Types } from './actions'
+import { Types } from '../actions/actions'
 
 export const INITIAL_STATE = {
   newBill: {
