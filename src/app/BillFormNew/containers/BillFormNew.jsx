@@ -113,9 +113,9 @@ class NewBillForm extends React.Component {
                 value={newBill.flatmateOwner}
                 onChange={e => onChangeValue('flatmateOwner', e.target.value)}
               >
-                <option value="" selected disabled hidden>Choose a flatmate</option>
-                {Object.keys(flatmates).map(id =>
-                  <option key={id} value={id}>{flatmates[id].firstName} {flatmates[id].lastName}</option>
+                <option value="" disabled>Choose a flatmate</option>
+                {flatmates.map(({ id, firstName, lastName }) =>
+                  <option key={id} value={id}>{firstName} {lastName}</option>
                 )}
               </select>
             </fieldset>
@@ -158,7 +158,7 @@ class NewBillForm extends React.Component {
               </h4>
 
               <fieldset className="uk-fieldset uk-margin">
-                {Object.keys(flatmates).map(id =>
+                {flatmates.map(({ id, firstName, lastName }) =>
                   <label key={id} className="uk-display-block uk-margin-bottom">        
                     <input
                       ref={`contributor${id}`}
@@ -169,7 +169,7 @@ class NewBillForm extends React.Component {
                       onChange={this.handleContributor}
                     />
 
-                    <span>&nbsp;{flatmates[id].firstName} {flatmates[id].lastName}</span>
+                    <span>&nbsp;{firstName} {lastName}</span>
 
                     {!equalSegmentSplit && this.refs[`contributor${id}`].checked ?
                       <input
@@ -243,7 +243,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = (state, ownProps) => ({
-  flatmates: state.flatmates,
+  flatmates: state.Flatmates.flatmates,
   newBill: state.BillFormNew.newBill,
   isEditing: state.BillFormNew.isEditing,
   equalSegmentSplit: state.BillFormNew.equalSegmentSplit

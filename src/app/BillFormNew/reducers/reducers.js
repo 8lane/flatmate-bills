@@ -16,7 +16,7 @@ export const INITIAL_STATE = {
     segmentsCurrentBalance: 0,
     segments: [],
   },
-  isEditing: true,
+  isEditing: false,
   equalSegmentSplit: true,
 }
 

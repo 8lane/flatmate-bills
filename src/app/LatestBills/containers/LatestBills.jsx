@@ -1,27 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import firebase from 'firebase'
 
 import { Creators } from '../actions/actions';
 
-import { Creators as FlatmateCreators } from '../../Flatmates/actions/actions';
-
-import { DeleteBtn, BillDate, BillPrice, BillSegment, BillTitle } from '../../Common'
-
-const fetch = () => {
-  return dispatch => {
-    dispatch(FlatmateCreators.getFlatmatesAttempt())
-
-    firebase.database().ref('flatmates').once('value')
-      .then(snapshot => dispatch(FlatmateCreators.getFlatmatesSuccess(snapshot.val().default)))
-      .catch(err => dispatch(FlatmateCreators.getFlatmatesFailure(err)))
-
-  }
-}
+import {
+  DeleteBtn,
+  BillDate,
+  BillPrice,
+  BillSegment,
+  BillTitle
+} from '../../Common'
 
 class LatestBills extends React.Component {
   componentDidMount() {
-    this.props.getFlatmates()
+    //this.props.getFlatmates()
   }
 
   render() {
@@ -86,7 +78,6 @@ class LatestBills extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getFlatmates: () => dispatch(fetch()),
   onBillDelete: (billId) => dispatch(Creators.deleteBill(billId)),
   onToggleSegmentPaid: (billId, flatmateId) => dispatch(Creators.toggleSegmentPaid(billId, flatmateId))
 });
