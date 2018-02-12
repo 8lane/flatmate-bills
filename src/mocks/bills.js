@@ -39,7 +39,7 @@ export default [
     ],
   },
   {
-    id: 2,
+    id: 1,
     name: 'Council Tax',
     flatmateOwner: 3,
     price: 110,
@@ -72,7 +72,7 @@ export default [
     ],
   },
   {
-    id: 3,
+    id: 2,
     name: 'Water',
     flatmateOwner: 0,
     price: 147.84,
@@ -80,7 +80,7 @@ export default [
     dateTo: '31/03/18',
     datePaid: null,
     archived: false,
-    numberOfSplitSegments: 0,
+    numberOfSplitSegments: 1,
     segmentsIsPaid: false,
     segmentsCurrentBalance: 0,
     segments: [

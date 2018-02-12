@@ -5,7 +5,11 @@ export const { Types, Creators } = createActions({
   getBillsSuccess: ['bills'],
   getBillsFailure: ['error'],
 
+  updateBillAttempt: [],
+  updateBillSuccess: [],
+  updateBillFailure: ['error', 'originalBill'],
+
   saveNewBill: ['newBill'],
   deleteBill: ['billId'],
-  toggleSegmentPaid: ['billId', 'flatmateId']
+  toggleSegmentPaid: ['latestBills']
 })

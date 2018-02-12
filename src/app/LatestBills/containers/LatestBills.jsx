@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import { Creators } from '../actions/actions';
 
+import { toggleSegmentPaid } from '../services'
+
 import {
   DeleteBtn,
   BillDate,
@@ -62,7 +64,7 @@ class LatestBills extends React.Component {
                     segment,
                     onToggleSegmentPaid: e => {
                       e.preventDefault()
-                      onToggleSegmentPaid(bill.id, segment.flatmateId)
+                      onToggleSegmentPaid(bill.id, segment.flatmateId, latestBills)
                     }
                   }} />
 
@@ -79,7 +81,7 @@ class LatestBills extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   onBillDelete: (billId) => dispatch(Creators.deleteBill(billId)),
-  onToggleSegmentPaid: (billId, flatmateId) => dispatch(Creators.toggleSegmentPaid(billId, flatmateId))
+  onToggleSegmentPaid: (billId, flatmateId, latestBills) => dispatch(toggleSegmentPaid(billId, flatmateId, latestBills))
 });
 
 const mapStateToProps = (state, ownProps) => ({
