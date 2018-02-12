@@ -1,21 +1,21 @@
 export default {
-  1: {
+  0: {
     firstName: 'Tom',
     lastName: 'Christian',
   },
-  2: {
+  1: {
     firstName: 'Chi',
     lastName: 'Hsung',
   },
-  3: {
+  2: {
     firstName: 'Harriet',
     lastName: 'Bird',
   },
-  4: {
+  3: {
     firstName: 'Allison',
     lastName: 'Morrison',
   },
-  5: {
+  4: {
     firstName: 'Annie',
     lastName: 'Dunno',
   }

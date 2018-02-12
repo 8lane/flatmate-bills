@@ -1,8 +1,8 @@
 export default [
   {
-    id: 1,
+    id: 0,
     name: 'Internet',
-    flatmateOwner: 1,
+    flatmateOwner: 0,
     price: 42,
     dateFrom: '22/01/18',
     dateTo: '23/02/18',
@@ -13,7 +13,7 @@ export default [
     segmentsCurrentBalance: 0,
     segments: [
       {
-        flatmateId: 1,
+        flatmateId: 0,
         daysOwed: 33,
         price: 10.50,
         isPaid: false
@@ -52,7 +52,7 @@ export default [
     segmentsCurrentBalance: 36.66666666666667,
     segments: [
       {
-        flatmateId: 1,
+        flatmateId: 0,
         daysOwed: 33,
         price: 36.66666666666667,
         isPaid: false
@@ -74,18 +74,18 @@ export default [
   {
     id: 3,
     name: 'Water',
-    flatmateOwner: 1,
+    flatmateOwner: 0,
     price: 147.84,
     dateFrom: '22/01/18',
     dateTo: '31/03/18',
     datePaid: null,
     archived: false,
-    numberOfSplitSegments: 1,
+    numberOfSplitSegments: 0,
     segmentsIsPaid: false,
     segmentsCurrentBalance: 0,
     segments: [
       {
-        flatmateId: 1,
+        flatmateId: 0,
         daysOwed: 69,
         price: 36.96,
         isPaid: false
@@ -109,7 +109,7 @@ export default [
         isPaid: false
       },
       {
-        flatmateId: 5,
+        flatmateId: 1,
         daysOwed: 52,
         price: 27.85,
         isPaid: false
