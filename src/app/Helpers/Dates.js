@@ -1,3 +1,3 @@
-export const getDaysBetweenDates = (from, to, format = 'DD/MM/YY') => {
-  return moment(to, format).diff(moment(from, format), 'days') + 1
-} 
+export const getDaysBetweenDates = (from, to) => {
+  return moment(to).diff(moment(from), 'days') + 1
+}

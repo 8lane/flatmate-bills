@@ -1,6 +1,6 @@
 import firebase from 'firebase'
 
-import { round, calculatePricePerDay } from '../../helpers/Prices'
+import { round, calculatePricePerDay, calculatePricePerPerson } from '../../helpers/Prices'
 import { getDaysBetweenDates } from '../../helpers/Dates'
 
 import { Creators } from '../../LatestBills/actions/actions';
@@ -14,7 +14,9 @@ export default (billId, flatmateId, currentBills) => {
         let segmentsIsPaid
   
         const numberOfDays = getDaysBetweenDates(bill.dateFrom, bill.dateTo)
-        const pricePerDay = calculatePricePerDay(bill, numberOfDays)
+        const pricePerDay = calculatePricePerPerson(
+          calculatePricePerDay(bill.price, numberOfDays), bill.segments.length, bill.numberOfSplitSegments
+        )
   
         return bill.merge({
           segments: bill.segments.map(segment => {
