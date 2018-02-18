@@ -31,31 +31,21 @@ class NewBillForm extends React.Component {
   }
 
   handleContributor = (evt) => {
-    const { newBill: { segments } } = this.props
     const flatmateId = parseInt(evt.target.value)
-    let newSegments = []
+    const { segments } = this.props.newBill
+    
+    let newSegments = [...segments, {
+      flatmateId,
+      daysOwed: null,
+      price: null,
+      isPaid: false
+    }]
 
-    if (segments.length) {
-      segments.forEach(segment => {
-        if (segment.flatmateId === flatmateId) {
-          newSegments = segments.filter(segment => segment.flatmateId !== flatmateId)
-        } else {
-          newSegments = [...segments, {
-            flatmateId,
-            daysOwed: null,
-            price: null,
-            isPaid: false
-          }]
-        }
-      })
-    } else {
-      newSegments = [...segments, {
-        flatmateId,
-        daysOwed: null,
-        price: null,
-        isPaid: false
-      }]
-    }
+    segments.length && segments.forEach(segment => {
+      if (segment.flatmateId === flatmateId) {
+        newSegments = segments.filter(segment => segment.flatmateId !== flatmateId)
+      }
+    })
 
     this.props.onChangeValue('segments', newSegments)
   }
@@ -77,6 +67,7 @@ class NewBillForm extends React.Component {
         <fieldset className="uk-fieldset uk-margin">
           <h4>What kind of bill is it?</h4>
           <input
+            required
             className="uk-input uk-form-large"
             placeholder="e.g. Council Tax"
             type="text"
@@ -86,35 +77,9 @@ class NewBillForm extends React.Component {
         </fieldset>
 
         <fieldset className="uk-fieldset uk-margin">
-          <h4>How much does it cost?</h4>
-          <input
-            className="uk-input uk-form-large"
-            placeholder="e.g. £65.12"
-            type="number"
-            value={newBill.price}
-            onChange={e => onChangeValue('price', e.target.value)}
-          />
-        </fieldset>
-
-        <fieldset className="uk-fieldset uk-margin">
-          <h4>Which flatmate is managing it?</h4>
-          <select
-            className="uk-select uk-form-large"
-            placeholder="e.g. Antonio Conte"
-            type="text"
-            value={newBill.flatmateOwner}
-            onChange={e => onChangeValue('flatmateOwner', e.target.value)}
-          >
-            <option value="" disabled>Choose a flatmate</option>
-            {flatmates.map(({ id, firstName, lastName }) =>
-              <option key={id} value={id}>{firstName} {lastName}</option>
-            )}
-          </select>
-        </fieldset>
-
-        <fieldset className="uk-fieldset uk-margin">
           <h4>What date range does it cover?</h4>
           <DateRangePicker
+            required
             block={true}
             isOutsideRange={() => false}
             startDate={newBill.dateFrom ? moment(newBill.dateFrom) : null}
@@ -129,6 +94,35 @@ class NewBillForm extends React.Component {
             onFocusChange={focusedInput => this.setState({ focusedInput })}
             displayFormat="DD-MM-YYYY"
           />
+        </fieldset>
+
+        <fieldset className="uk-fieldset uk-margin">
+          <h4>How much does it cost?</h4>
+          <input
+            required
+            className="uk-input uk-form-large"
+            placeholder="e.g. £65.12"
+            type="number"
+            value={newBill.price}
+            onChange={e => onChangeValue('price', e.target.value)}
+          />
+        </fieldset>
+
+        <fieldset className="uk-fieldset uk-margin">
+          <h4>Which flatmate is managing it?</h4>
+          <select
+            required
+            className="uk-select uk-form-large"
+            placeholder="e.g. Antonio Conte"
+            type="text"
+            value={newBill.flatmateOwner}
+            onChange={e => onChangeValue('flatmateOwner', e.target.value)}
+          >
+            <option value="" disabled>Choose a flatmate</option>
+            {flatmates.map(({ id, firstName, lastName }) =>
+              <option key={id} value={id}>{firstName} {lastName}</option>
+            )}
+          </select>
         </fieldset>
 
         <fieldset className="uk-fieldset uk-margin">
@@ -175,32 +169,7 @@ class NewBillForm extends React.Component {
               </label>
             )}
           </fieldset>
-
         </fieldset>
-  
-        {/* <fieldset className="uk-fieldset uk-margin">
-          <h4>Has the bill been already paid?</h4>
-          <label>
-            <input
-              className="uk-checkbox"
-              type="checkbox"
-              onChange={e => onChangeValue('archived', !newBill.archived)}
-            />
-            &nbsp; Already paid? 
-          </label>
-        </fieldset>
-
-        {newBill && newBill.archived ?
-          <fieldset className="uk-fieldset uk-margin">
-            <SingleDatePicker
-              date={newBill.datePaid}
-              onDateChange={datePaid => onChangeValue('datePaid', datePaid)}
-              focused={this.state.focused}
-              onFocusChange={({ focused }) => this.setState({ focused })}
-            />
-          </fieldset>
-          : null
-        } */}
 
         <button
           className="uk-button uk-button-primary uk-button-large"
@@ -225,7 +194,6 @@ const mapDispatchToProps = dispatch => ({
   onToggleEqualSplit: () => dispatch(Creators.toggleEqualSegmentSplit()),
   onToggleVisibility: (editing) => dispatch(Creators.toggleNewFormVisibility(editing)),
   onChangeValue: (fieldKey, fieldValue) => dispatch(Creators.updateNewFormField(fieldKey, fieldValue)),
-  // onSaveNewBill: (newBill) => dispatch(LatestBillsCreators.saveNewBill(newBill)),
   onSaveNewBill: (newBill) => dispatch(createBill(newBill)),
   onUpdateSegmentDaysOwed: (fieldValue, flatmateId) => dispatch(Creators.updateSegmentDaysOwed(fieldValue, flatmateId))
 })

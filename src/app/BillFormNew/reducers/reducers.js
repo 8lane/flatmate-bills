@@ -1,5 +1,8 @@
 import { createReducer } from 'reduxsauce'
+
 import { Types } from '../actions/actions'
+import { calculatePricePerDay, calculatePricePerPerson } from '../../helpers/Prices'
+import { getDaysBetweenDates } from '../../helpers/Dates'
 
 export const INITIAL_STATE = {
   newBill: {
@@ -15,7 +18,7 @@ export const INITIAL_STATE = {
     segmentsCurrentBalance: 0,
     segments: [],
   },
-  isEditing: false,
+  isEditing: true,
   equalSegmentSplit: true,
 }
 
@@ -49,13 +52,47 @@ const updateSegmentDaysOwed = (state, action) => ({
   }
 })
 
-const updateNewFormField = (state, action) => ({
-  ...state,
-  newBill: {
-    ...state.newBill,
-    [action.fieldKey]: action.fieldValue
+const updateNewFormField = (state, action) => {
+  const {
+    newBill: {
+      price,
+      dateFrom,
+      dateTo,
+      segments,
+      numberOfSplitSegments
+    },
+    equalSegmentSplit,
+  } = state
+  
+  let daysOwed = null
+  let pricePerDay = null
+  let value = action.fieldValue
+
+  if (action.fieldKey === 'segments') {
+    if (dateFrom && dateTo) {
+      daysOwed = getDaysBetweenDates(dateFrom, dateTo)
+    }
+
+    if (daysOwed) {
+      const ppd = calculatePricePerDay(parseFloat(price), daysOwed)
+      pricePerDay = calculatePricePerPerson(ppd, segments.length + 1, numberOfSplitSegments)
+    }
+
+    value = action.fieldValue.map(segment => ({
+      ...segment,
+      daysOwed,
+      price: pricePerDay * daysOwed
+    }))
   }
-})
+
+  return {
+    ...state,
+    newBill: {
+      ...state.newBill,
+      [action.fieldKey]: value,
+    }
+  }
+}
 
 const clearNewForm = (state) => ({ ...state, newBill: INITIAL_STATE.newBill })
 

@@ -28,7 +28,7 @@ export default (billId, flatmateId, currentBills) => {
                 segmentsCurrentBalance = bill.segmentsCurrentBalance + (pricePerDay * segment.daysOwed)
               }
   
-              segmentsIsPaid = bill.price === round(segmentsCurrentBalance)
+              segmentsIsPaid = parseFloat(bill.price) === round(segmentsCurrentBalance)
   
               return segment.merge({ isPaid: !segment.isPaid })
             }
