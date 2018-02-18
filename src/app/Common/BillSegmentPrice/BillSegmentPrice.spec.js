@@ -7,13 +7,17 @@ describe('When displaying the price to pay per contributor', () => {
 
   beforeAll(() => {
     BillSegmentPriceComponent = shallow(
-      <BillSegmentPrice isPaid={false} />
+      <BillSegmentPrice price={55.553} isPaid={false} />
     )
   })
 
   describe('and it has not yet been paid', () => {
     it('should display the price', () => {
-      expect(BillSegmentPriceComponent.find(BillPrice).exists()).toBeTruthy()
+      expect(BillSegmentPriceComponent.find('span.bill-segment__price').exists()).toBeTruthy()
+    })
+
+    it('should be the correct format', () => {
+      expect(BillSegmentPriceComponent.find('span.bill-segment__price').text()).toEqual('£55.55')
     })
   })
 

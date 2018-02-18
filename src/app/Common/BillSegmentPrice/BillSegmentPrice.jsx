@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { BillPrice } from '../../Common'
+import { round } from '../../helpers/Prices'
 
 const BillSegmentPrice = ({ price, isPaid }) =>
   isPaid ?
     <span className="bill-segment__price bill-segment__price--success" uk-icon="icon: check; ratio: 1.2" />
   :
-    <BillPrice className="bill-segment__price" total={price} />
+    <span className="bill-segment__price">£{round(price)}</span>
 
 export default BillSegmentPrice

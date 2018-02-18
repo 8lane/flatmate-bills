@@ -30,17 +30,10 @@ class LatestBills extends React.Component {
   
               <div className="uk-display-inline-block uk-h3 uk-align-right uk-margin-remove">
                 {!bill.segmentsIsPaid ?
-                  <div>
-                    <BillPrice
-                      className=""
-                      total={bill.segmentsCurrentBalance}
-                    />
-                    &nbsp;/&nbsp;
-                    <BillPrice
-                      className=""
-                      total={bill.price}
-                    />
-                  </div>
+                  <BillPrice
+                    currentBalance={bill.segmentsCurrentBalance}
+                    totalCost={bill.price}
+                  />
                 :
                   <span className="uk-h3 uk-margin-remove">Paid</span>
                 }

@@ -1,16 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk';
-import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase'
 import firebase from 'firebase'
 
 import App from './app/App'
-
-import { reducers as Bills } from './app/LatestBills'
-import { reducers as BillFormNew } from './app/BillFormNew'
-import { reducers as Flatmates } from './app/Flatmates'
+import { reducers } from './app/Core'
 
 firebase.initializeApp({
   apiKey: "AIzaSyCBC7D-589zHcKxZu7GeAie2QeD15aPO7c",
@@ -21,14 +17,8 @@ firebase.initializeApp({
   messagingSenderId: "408329859921"
 })
 
-const appReducer = combineReducers({
-  Bills,
-  BillFormNew,
-  Flatmates
-})
-
 const store = createStore(
-  appReducer,
+  reducers,
   /* preloadedState, */
   compose(
     applyMiddleware(thunk),

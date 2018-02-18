@@ -22,7 +22,6 @@ UIkit.use(Icons);
 
 class App extends React.Component {
   componentDidMount() {
-
     // firebase.database().ref('bills').set(require('../mocks/bills').default)
     // firebase.database().ref('flatmates').set(require('../mocks/flatmates').default)
     this.props.getFlatmates()

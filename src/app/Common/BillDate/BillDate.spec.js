@@ -7,7 +7,7 @@ describe('When displaying the bill date', () => {
 
   beforeAll(() => {
     BillDateComponent = shallow(
-      <BillDate dateFrom="21/01/18" dateTo="22/03/18" />
+      <BillDate dateFrom="2018-03-05T12:00:00+00:00" dateTo="2018-05-12T12:00:00+00:00" />
     )
   })
 
@@ -16,6 +16,6 @@ describe('When displaying the bill date', () => {
   })
 
   it('should have the correct format', () => {
-    expect(BillDateComponent.find('span.bill-date').text()).toEqual('21 Jan–22 Mar')
+    expect(BillDateComponent.find('span.bill-date').text()).toEqual('05 Mar–12 May')
   })
 })

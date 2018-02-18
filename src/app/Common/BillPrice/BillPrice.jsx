@@ -1,13 +1,16 @@
 import React from 'react'
-
 import { round } from '../../helpers/Prices'
 
-const BillPrice = ({ total, className }) => {
-  return <span className={`bill-price ${className}`}>£{round(total)}</span>
+const BillPrice = ({ currentBalance, totalCost, className }) => {
+  return (
+    <span className={`bill-price ${className}`}>
+      £{round(currentBalance)} / £{round(totalCost)}
+    </span>
+  )
 }
 
 BillPrice.defaultProps = {
-  className: ''
+  className: '',
 }
 
 export default BillPrice
