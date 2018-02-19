@@ -10,16 +10,6 @@ export const INITIAL_STATE = Immutable({
 
 const toggleSegmentPaid = (state, action) => state.merge({ latestBills: action.latestBills })
 
-const saveNewBill = (state, action) => state.merge({
-  latestBills: [
-    ...state.latestBills,
-    {
-      id: state.latestBills.length + 1,
-      ...action.newBill
-    }
-  ]
-})
-
 const deleteBill = (state, action) => state.merge({
   latestBills: state.latestBills.filter(bill => bill.id !== action.billId)
 })
@@ -29,7 +19,7 @@ const getBillsSuccess = (state, action) => state.merge({ gettingBills: false, la
 const getBillsFailure = (state, action) => state.merge({ gettingBills: false, error: action.error })
 
 const updateBillAttempt = (state) => state.merge({ updatingBill: true })
-const updateBillSuccess = (state, action) => state.merge({ updatingBill: false, error: null })
+const updateBillSuccess = (state) => state.merge({ updatingBill: false, error: null })
 const updateBillFailure = (state, action) => state.merge({
   updatingBill: false,
   error: action.error,
@@ -48,7 +38,6 @@ const ACTION_HANDLERS = {
   [Types.UPDATE_BILL_FAILURE]: updateBillFailure,
 
   [Types.TOGGLE_SEGMENT_PAID]: toggleSegmentPaid,
-  [Types.SAVE_NEW_BILL]: saveNewBill,
   [Types.DELETE_BILL]: deleteBill
 }
 

@@ -31,15 +31,18 @@ class NewBillForm extends React.Component {
   }
 
   handleContributor = (evt) => {
-    const flatmateId = parseInt(evt.target.value)
     const { segments } = this.props.newBill
+    const flatmateId = parseInt(evt.target.value)
     
-    let newSegments = [...segments, {
-      flatmateId,
-      daysOwed: null,
-      price: null,
-      isPaid: false
-    }]
+    let newSegments = [
+      ...segments,
+      {
+        flatmateId,
+        daysOwed: null,
+        price: null,
+        isPaid: false
+      }
+    ]
 
     segments.length && segments.forEach(segment => {
       if (segment.flatmateId === flatmateId) {

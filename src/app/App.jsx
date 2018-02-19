@@ -13,6 +13,8 @@ import { Creators as BillFormNewCreators } from './BillFormNew/actions/actions';
 import { LatestBills } from './LatestBills/containers'
 import { BillFormNew } from './BillFormNew/containers'
 
+import { AppTitle } from './Common'
+
 import { getFlatmates } from './Flatmates/services'
 import { getBills } from './LatestBills/services'
 
@@ -32,7 +34,7 @@ class App extends React.Component {
     return (
       <div className="app-container">
         <h1 className="uk-margin-top">
-          {!this.props.isEditing ? '🏠 25 Northways Bills' : '💸 Create new bill' }
+          <AppTitle editMode={this.props.isEditing} />
 
           <button
             className="new-bill-btn uk-button uk-button-text uk-margin-remove-bottom uk-align-right"
@@ -65,5 +67,9 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   isEditing: state.BillFormNew.isEditing
 })
+
+export {
+  App
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
