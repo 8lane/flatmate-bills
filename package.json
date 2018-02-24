@@ -5,11 +5,13 @@
   "author": "Tom Christian",
   "license": "MIT",
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack-dev-server",
-    "coverage": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "dev": "NODE_ENV=development webpack-dev-server --config ./webpack.dev.config.js",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "coverage": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "build": "webpack -p --progress --config ./webpack.production.config.js",
+    "deploy:master": "curl -X POST -d '' https://api.netlify.com/build_hooks/5a919a02295b556a4e259122",
+    "deploy:test": "curl -X POST -d '' https://api.netlify.com/build_hooks/5a919330efbe5d54df476611"
   },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.39",
@@ -28,6 +30,7 @@
     "css-loader": "^0.28.9",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "extract-text-webpack-plugin": "^3.0.2",
     "firebase": "^4.9.1",
     "jest": "^22.2.2",
     "moment": "^2.20.1",
