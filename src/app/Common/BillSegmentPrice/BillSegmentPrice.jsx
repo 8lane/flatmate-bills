@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { round } from '../../helpers/Prices'
+import { round } from '../../Helpers/Prices'
 
 const BillSegmentPrice = ({ price, isPaid }) =>
   isPaid ?

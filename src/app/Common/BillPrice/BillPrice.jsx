@@ -1,5 +1,5 @@
 import React from 'react'
-import { round } from '../../helpers/Prices'
+import { round } from '../../Helpers/Prices'
 
 const BillPrice = ({ currentBalance, totalCost, className }) => {
   return (

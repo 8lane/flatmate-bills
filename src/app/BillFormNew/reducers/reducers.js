@@ -1,8 +1,8 @@
 import { createReducer } from 'reduxsauce'
 
 import { Types } from '../actions/actions'
-import { calculatePricePerDay, calculatePricePerPerson } from '../../helpers/Prices'
-import { getDaysBetweenDates } from '../../helpers/Dates'
+import { calculatePricePerDay, calculatePricePerPerson } from '../../Helpers/Prices'
+import { getDaysBetweenDates } from '../../Helpers/Dates'
 
 export const INITIAL_STATE = {
   newBill: {
