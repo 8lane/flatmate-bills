@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1519480488578" clover="3.2.0">
-  <project timestamp="1519480488578" name="All files">
+<coverage generated="1519483758167" clover="3.2.0">
+  <project timestamp="1519483758167" name="All files">
     <metrics statements="113" coveredstatements="60" conditionals="42" coveredconditionals="10" methods="87" coveredmethods="14" elements="242" coveredelements="84" complexity="0" loc="113" ncloc="113" packages="22" files="30" classes="30">
       <package name="flatmate-bills">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
