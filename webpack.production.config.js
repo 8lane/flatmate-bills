@@ -1,14 +1,42 @@
 const webpack = require('webpack')
 const path = require('path')
-const WebpackExtractTextPlugin = require('extract-text-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BaseConfig = require('./webpack.base.config')
 
 module.exports = Object.assign({}, BaseConfig, {
   output: {
-    filename: '[name].min.js',
+    filename: '[name].min.js?v=[chunkhash]',
     path: path.resolve(__dirname, 'build')
   },
-  devtool: 'eval-source-map',
+  module: Object.assign({}, BaseConfig.module, {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: [
+              require('@babel/plugin-proposal-object-rest-spread'),
+              require('@babel/plugin-proposal-class-properties')
+            ]
+          }
+        }
+      }
+    ]
+  }),
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
@@ -40,8 +68,8 @@ module.exports = Object.assign({}, BaseConfig, {
       },
       comments: false
     }),
-    new WebpackExtractTextPlugin({
-      filename: 'css/homepage.min.css?v=[contenthash]',
+    new ExtractTextPlugin({
+      filename: 'app.min.css?v=[contenthash]',
       allChunks: true
     })
   ],
