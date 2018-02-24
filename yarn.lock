@@ -189,6 +189,12 @@
     "@babel/helper-function-name" "7.0.0-beta.39"
     "@babel/plugin-syntax-class-properties" "7.0.0-beta.39"
 
+"@babel/plugin-proposal-export-default-from@^7.0.0-beta.40":
+  version "7.0.0-beta.40"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-export-default-from/-/plugin-proposal-export-default-from-7.0.0-beta.40.tgz#af86537dc76cb3d31b6697480e30058a6da3c753"
+  dependencies:
+    "@babel/plugin-syntax-export-default-from" "7.0.0-beta.40"
+
 "@babel/plugin-proposal-object-rest-spread@7.0.0-beta.39":
   version "7.0.0-beta.39"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.0.0-beta.39.tgz#ea4d6ea974a364028e5074b1abe6505924d179a3"
@@ -215,6 +221,10 @@
 "@babel/plugin-syntax-class-properties@7.0.0-beta.39":
   version "7.0.0-beta.39"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-class-properties/-/plugin-syntax-class-properties-7.0.0-beta.39.tgz#a1a0e89c6042635cd21aafbdec3f006f06c368aa"
+
+"@babel/plugin-syntax-export-default-from@7.0.0-beta.40":
+  version "7.0.0-beta.40"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-export-default-from/-/plugin-syntax-export-default-from-7.0.0-beta.40.tgz#6457a80bd22779eaf61f41b1d322d84d7e2deb65"
 
 "@babel/plugin-syntax-jsx@7.0.0-beta.39":
   version "7.0.0-beta.39"
