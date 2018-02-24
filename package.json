@@ -5,11 +5,13 @@
   "author": "Tom Christian",
   "license": "MIT",
   "scripts": {
-    "build": "webpack -p --progress --config ./webpack.production.config.js",
     "dev": "NODE_ENV=development webpack-dev-server --config ./webpack.dev.config.js",
-    "coverage": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "coverage": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "build": "webpack -p --progress --config ./webpack.production.config.js",
+    "deploy:master": "curl -X POST -d '' https://api.netlify.com/build_hooks/5a919a02295b556a4e259122",
+    "deploy:test": "curl -X POST -d '' https://api.netlify.com/build_hooks/5a919330efbe5d54df476611"
   },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.39",
