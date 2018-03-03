@@ -18,18 +18,26 @@ class LatestBills extends React.Component {
     const { latestBills, flatmates, onBillDelete, onToggleSegmentPaid } = this.props
 
     const sortedBills = [].concat(latestBills).sort((a, b) => a.id < b.id)
-
+  
     return (
       <ul className="latest-bills uk-list uk-list-large">
         {latestBills && sortedBills.map((bill) => {
+
+          const segmentsIsPaid = bill.segments.filter(segment => segment.isPaid).length === bill.segments.length
+
           return (
             <li key={bill.id} className="uk-margin-top uk-margin-bottom">
               <BillTitle title={bill.name} />
 
-              <BillDate dateFrom={bill.dateFrom} dateTo={bill.dateTo} className="latest-bills__date" />
+              <BillDate
+                dateDue={bill.dateDue}
+                dateFrom={bill.dateFrom}
+                dateTo={bill.dateTo}
+                className="latest-bills__date"
+              />
   
               <div className="uk-display-inline-block uk-h3 uk-align-right uk-margin-remove">
-                {!bill.segmentsIsPaid ?
+                {!segmentsIsPaid ?
                   <BillPrice
                     currentBalance={bill.segmentsCurrentBalance}
                     totalCost={bill.price}
@@ -48,6 +56,8 @@ class LatestBills extends React.Component {
                 {flatmates.length ? bill.segments.map(segment => {
                   const { firstName, lastName } = flatmates[segment.flatmateId]
 
+                  const billIdx = latestBills.findIndex(item => item.id === bill.id)
+
                   return <BillSegment {...{
                     key: segment.flatmateId,
                     firstName,
@@ -55,7 +65,7 @@ class LatestBills extends React.Component {
                     segment,
                     onToggleSegmentPaid: e => {
                       e.preventDefault()
-                      onToggleSegmentPaid(bill.id, segment.flatmateId, latestBills)
+                      onToggleSegmentPaid(latestBills, billIdx, segment.flatmateId)
                     }
                   }} />
 
@@ -72,7 +82,7 @@ class LatestBills extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   onBillDelete: (billId) => dispatch(Creators.deleteBill(billId)),
-  onToggleSegmentPaid: (billId, flatmateId, latestBills) => dispatch(toggleSegmentPaid(billId, flatmateId, latestBills))
+  onToggleSegmentPaid: (bills, billIdx, flatmateId) => dispatch(toggleSegmentPaid(bills, billIdx, flatmateId))
 });
 
 const mapStateToProps = (state, ownProps) => ({

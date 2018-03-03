@@ -1,48 +1,34 @@
-import firebase from 'firebase'
-
-import { round, calculatePricePerDay, calculatePricePerPerson } from '../../Helpers/Prices'
-import { getDaysBetweenDates } from '../../Helpers/Dates'
-
 import { Creators } from '../../LatestBills/actions/actions';
 import { updateBill } from '../services'
 
-export default (billId, flatmateId, currentBills) => {
+export default (bills, billIndex, flatmateId) => {
   return dispatch => {
-    const updatedBills = currentBills.map(bill => {
-      if (bill.id === billId) {
-        let segmentsCurrentBalance
-        let segmentsIsPaid
+
+    const updatedBills = bills.map((bill, idx) => {
+      if (billIndex === idx) {
   
-        const numberOfDays = getDaysBetweenDates(bill.dateFrom, bill.dateTo)
-        const pricePerDay = calculatePricePerPerson(
-          calculatePricePerDay(bill.price, numberOfDays), bill.segments.length, bill.numberOfSplitSegments
-        )
+        const togglePaid = (segment) =>
+          segment.flatmateId === flatmateId ? { ...segment, isPaid: !segment.isPaid } : segment
   
-        return bill.merge({
-          segments: bill.segments.map(segment => {
-            if (segment.flatmateId === flatmateId) {
+        const updateBalance = (accumulator, segment) => {
+          if (flatmateId === segment.flatmateId) {
+            return segment.isPaid ? accumulator - segment.price : accumulator + segment.price
+          }
   
-              if (segment.isPaid) {
-                segmentsCurrentBalance = bill.segmentsCurrentBalance - (pricePerDay * segment.daysOwed)
-              } else {
-                segmentsCurrentBalance = bill.segmentsCurrentBalance + (pricePerDay * segment.daysOwed)
-              }
+          return accumulator
+        }
   
-              segmentsIsPaid = parseFloat(bill.price) === round(segmentsCurrentBalance)
-  
-              return segment.merge({ isPaid: !segment.isPaid })
-            }
-            return segment
-          }),
-          segmentsCurrentBalance,
-          segmentsIsPaid
-        })
+        return {
+          ...bill,
+          segments: bill.segments.map(togglePaid),
+          segmentsCurrentBalance: bill.segments.reduce(updateBalance, bill.segmentsCurrentBalance),
+        }
       }
   
       return bill
     })
 
     dispatch(Creators.toggleSegmentPaid(updatedBills))
-    dispatch(updateBill(updatedBills[billId], currentBills[billId]))
+    dispatch(updateBill(updatedBills[billIndex], bills[billIndex]))
   }
 }

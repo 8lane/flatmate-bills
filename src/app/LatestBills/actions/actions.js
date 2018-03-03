@@ -11,5 +11,5 @@ export const { Types, Creators } = createActions({
 
   saveNewBill: ['newBill'],
   deleteBill: ['billId'],
-  toggleSegmentPaid: ['latestBills']
+  toggleSegmentPaid: ['updatedBills']
 })

@@ -12,13 +12,13 @@ describe('When toggling a bill segment as paid', () => {
   let sut
 
   beforeAll(() => {
-    sut = reducers(INITIAL_STATE, Creators.toggleSegmentPaid([{ id: 1 }]))
+    sut = reducers(INITIAL_STATE, Creators.toggleSegmentPaid([1,2,3]))
   })
 
-  it('should update the latest bills', () => {
-    expect(sut).toEqual({ gettingBills: false, latestBills: [{ id: 1 }], error: null })
+  it('should update the latest bills with the updated bills', () => {
+    expect(sut.latestBills).toEqual([1,2,3])
   })
-})
+});
 
 describe('When deleting a bill', () => {
   let sut

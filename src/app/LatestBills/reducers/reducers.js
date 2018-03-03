@@ -8,11 +8,8 @@ export const INITIAL_STATE = Immutable({
   error: null
 })
 
-const toggleSegmentPaid = (state, action) => state.merge({ latestBills: action.latestBills })
-
-const deleteBill = (state, action) => state.merge({
-  latestBills: state.latestBills.filter(bill => bill.id !== action.billId)
-})
+const toggleSegmentPaid = (state, action) => state.merge({ latestBills: action.updatedBills })
+const deleteBill = (state, action) => state.merge({ latestBills: state.latestBills.filter(bill => bill.id !== action.billId) })
 
 const getBillsAttempt = (state) => state.merge({ gettingBills: true })
 const getBillsSuccess = (state, action) => state.merge({ gettingBills: false, latestBills: action.bills })
