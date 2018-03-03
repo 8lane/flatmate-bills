@@ -100,6 +100,8 @@ class NewBillForm extends React.Component {
             focused={this.state.focusedDateDue}
             onDateChange={(date) => onChangeValue('dateDue', date.format())}
             onFocusChange={() => this.setState({ focusedDateDue: !this.state.focusedDateDue })}
+            isOutsideRange={() => false}
+            numberOfMonths={1}
             displayFormat="Do MMMM YYYY"
           />
         </fieldset>
