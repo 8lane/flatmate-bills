@@ -12,10 +12,10 @@ firebase.initializeApp(firebaseConfig(process.env.NODE_ENV))
 
 const store = createStore(
   reducers,
-  /* preloadedState, */
   compose(
     applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    window.navigator.userAgent.includes('Chrome') ?
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() : compose
   )
 )
 
