@@ -9,7 +9,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "coverage": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "build": "webpack -p --progress --config ./webpack.production.config.js",
+    "build": "NODE_ENV=production webpack -p --progress --config ./webpack.production.config.js",
     "deploy:master": "curl -X POST -d '' https://api.netlify.com/build_hooks/5a919a02295b556a4e259122",
     "deploy:test": "curl -X POST -d '' https://api.netlify.com/build_hooks/5a919330efbe5d54df476611"
   },
