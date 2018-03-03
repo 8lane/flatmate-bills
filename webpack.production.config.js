@@ -38,6 +38,11 @@ module.exports = Object.assign({}, BaseConfig, {
     ]
   }),
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.EnvironmentPlugin({
