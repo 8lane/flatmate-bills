@@ -5,7 +5,7 @@ import Immutable from 'seamless-immutable'
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 
-import { SingleDatePicker, DateRangePicker } from 'react-dates';
+import { SingleDatePicker } from 'react-dates';
 
 import { createBill } from '../../Core/services/firebaseService'
  
@@ -17,7 +17,7 @@ class NewBillForm extends React.Component {
     super(props)
 
     this.state = {
-      focusedInput: null
+      focusedDateDue: false
     }
   }
 
@@ -80,26 +80,6 @@ class NewBillForm extends React.Component {
         </fieldset>
 
         <fieldset className="uk-fieldset uk-margin">
-          <h4>What date range does it cover?</h4>
-          <DateRangePicker
-            required
-            block={true}
-            isOutsideRange={() => false}
-            startDate={newBill.dateFrom ? moment(newBill.dateFrom) : null}
-            startDateId="your_unique_start_date_id"
-            endDate={newBill.dateTo ? moment(newBill.dateTo) : null}
-            endDateId="your_unique_end_date_id"
-            focusedInput={this.state.focusedInput}
-            onDatesChange={({ startDate, endDate }) => {
-              startDate && onChangeValue('dateFrom', startDate.format())
-              endDate && onChangeValue('dateTo', endDate.format())
-            }}
-            onFocusChange={focusedInput => this.setState({ focusedInput })}
-            displayFormat="DD-MM-YYYY"
-          />
-        </fieldset>
-
-        <fieldset className="uk-fieldset uk-margin">
           <h4>How much does it cost?</h4>
           <input
             required
@@ -108,6 +88,19 @@ class NewBillForm extends React.Component {
             type="number"
             value={newBill.price}
             onChange={e => onChangeValue('price', e.target.value)}
+          />
+        </fieldset>
+
+        <fieldset className="uk-fieldset uk-margin">
+          <h4>When is it due?</h4>
+          <SingleDatePicker
+            block
+            placeholder="Select a date..."
+            date={newBill.dateDue ? moment(newBill.dateDue) : null}
+            focused={this.state.focusedDateDue}
+            onDateChange={(date) => onChangeValue('dateDue', date.format())}
+            onFocusChange={() => this.setState({ focusedDateDue: !this.state.focusedDateDue })}
+            displayFormat="Do MMMM YYYY"
           />
         </fieldset>
 
@@ -128,23 +121,54 @@ class NewBillForm extends React.Component {
           </select>
         </fieldset>
 
-        <fieldset className="uk-fieldset uk-margin">
-          <h4>Who's contributing to it?
+        {/* <fieldset className="uk-fieldset uk-margin"> */}
+          {/* <h4>Is it equally split?</h4> */}
+          {/* <label>
+            Yes&nbsp;
+            <input
+              className="uk-checkbox"
+              type="radio"
+              name="equalSegmentSplit"
+              checked={equalSegmentSplit}
+              onChange={e => onToggleEqualSplit()}
+            />
+          </label> */}
+          {/* &nbsp;&nbsp; */}
+          {/* <label>
+            No&nbsp;
+            <input
+              className="uk-checkbox"
+              type="radio"
+              name="equalSegmentSplit"
+              checked={!equalSegmentSplit}
+              onChange={e => onToggleEqualSplit()}
+            />
+          </label> */}
+        {/* </fieldset> */}
 
-          {newBill.segments.length > 1 &&
-            <label>
-              &nbsp;&ndash;
-              Is it equally split?
-              &nbsp;
-              <input
-                className="uk-checkbox"
-                type="checkbox"
-                checked={equalSegmentSplit}
-                onChange={e => onToggleEqualSplit()}
-              />
-            </label>
-          }
-          </h4>
+        {/* {!equalSegmentSplit &&
+          <fieldset className="uk-fieldset uk-margin">
+            <h4>What period does the bill cover?</h4>
+            <DateRangePicker
+              block={true}
+              isOutsideRange={() => false}
+              startDate={newBill.dateFrom ? moment(newBill.dateFrom) : null}
+              startDateId="your_unique_start_date_id"
+              endDate={newBill.dateTo ? moment(newBill.dateTo) : null}
+              endDateId="your_unique_end_date_id"
+              focusedInput={this.state.focusedInput}
+              onDatesChange={({ startDate, endDate }) => {
+                startDate && onChangeValue('dateFrom', startDate.format())
+                endDate && onChangeValue('dateTo', endDate.format())
+              }}
+              onFocusChange={focusedInput => this.setState({ focusedInput })}
+              displayFormat="DD-MM-YYYY"
+            />
+          </fieldset>
+        } */}
+        
+        <fieldset className="uk-fieldset uk-margin">
+          <h4>Who's contributing to it?</h4>
 
           <fieldset className="uk-fieldset uk-margin">
             {flatmates.map(({ id, firstName, lastName }) =>
@@ -160,7 +184,7 @@ class NewBillForm extends React.Component {
 
                 <span>&nbsp;{firstName} {lastName}</span>
 
-                {!equalSegmentSplit && this.refs[`contributor${id}`].checked ?
+                {/* {!equalSegmentSplit && this.refs[`contributor${id}`].checked ?
                   <input
                     className="uk-input uk-form-large uk-margin-top"
                     type="number"
@@ -168,7 +192,7 @@ class NewBillForm extends React.Component {
                     onChange={evt => onUpdateSegmentDaysOwed(evt.target.value, id)}
                   />
                   : null
-                }
+                } */}
               </label>
             )}
           </fieldset>

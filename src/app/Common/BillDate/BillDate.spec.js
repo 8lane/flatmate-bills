@@ -16,6 +16,6 @@ describe('When displaying the bill date', () => {
   })
 
   it('should have the correct format', () => {
-    expect(BillDateComponent.find('span.bill-date').text()).toEqual('05 Mar–12 May')
+    expect(BillDateComponent.find('span.bill-date').text()).toEqual('5th Mar–12th May')
   })
 })

@@ -9,6 +9,7 @@ export const INITIAL_STATE = {
     name: '',
     flatmateOwner: '',
     price: '',
+    dateDue: null,
     dateFrom: null,
     dateTo: null,
     datePaid: null,
@@ -56,33 +57,18 @@ const updateNewFormField = (state, action) => {
   const {
     newBill: {
       price,
-      dateFrom,
-      dateTo,
       segments,
-      numberOfSplitSegments
-    },
-    equalSegmentSplit,
+    }
   } = state
   
-  let daysOwed = null
-  let pricePerDay = null
   let value = action.fieldValue
 
   if (action.fieldKey === 'segments') {
-    if (dateFrom && dateTo) {
-      daysOwed = getDaysBetweenDates(dateFrom, dateTo)
-    }
+    value = action.fieldValue.map(segment => ({ ...segment, price: parseFloat(price / (segments.length + 1)) }))
+  }
 
-    if (daysOwed) {
-      const ppd = calculatePricePerDay(parseFloat(price), daysOwed)
-      pricePerDay = calculatePricePerPerson(ppd, segments.length + 1, numberOfSplitSegments)
-    }
-
-    value = action.fieldValue.map(segment => ({
-      ...segment,
-      daysOwed,
-      price: pricePerDay * daysOwed
-    }))
+  if (action.fieldKey === 'price') {
+    value = parseFloat(value)
   }
 
   return {
