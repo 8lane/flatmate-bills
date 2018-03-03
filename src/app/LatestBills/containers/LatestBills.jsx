@@ -15,14 +15,21 @@ import {
 
 class LatestBills extends React.Component {
   render() {
-    const { latestBills, flatmates, onBillDelete, onToggleSegmentPaid } = this.props
+    const { gettingBills, latestBills, flatmates, onBillDelete, onToggleSegmentPaid } = this.props
 
     const sortedBills = [].concat(latestBills).sort((a, b) => a.id < b.id)
   
     return (
       <ul className="latest-bills uk-list uk-list-large">
-        {latestBills && sortedBills.map((bill) => {
+        {gettingBills &&
+          <span className="latest-bills__spinner">💩</span>
+        }
 
+        {!gettingBills && latestBills && latestBills.length === 0 &&
+          <p className="uk-text-center">No bills added yet 🤔</p>
+        }
+
+        {latestBills && sortedBills.map((bill) => {
           const segmentsIsPaid = bill.segments.filter(segment => segment.isPaid).length === bill.segments.length
 
           return (
@@ -86,8 +93,13 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = (state, ownProps) => ({
+  gettingBills: state.Bills.gettingBills,
   latestBills: state.Bills.latestBills,
   flatmates: state.Flatmates.flatmates
 })
+
+export {
+  LatestBills
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(LatestBills)

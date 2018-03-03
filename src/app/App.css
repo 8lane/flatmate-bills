@@ -40,6 +40,15 @@
   font-weight: 200;
 }
 
+.latest-bills__spinner {
+  display: block;
+  font-size: 3rem;
+  text-align: center;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin { 100% { transform:rotate(360deg); } }
+
 /* Bill Segment Component */
 .bill-segment {
   margin-top: 0;
