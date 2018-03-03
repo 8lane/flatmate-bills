@@ -33,7 +33,7 @@ class LatestBills extends React.Component {
           const segmentsIsPaid = bill.segments.filter(segment => segment.isPaid).length === bill.segments.length
 
           return (
-            <li key={bill.id} className="uk-margin-top uk-margin-bottom">
+            <li key={bill.id} className="latest-bills__bill uk-margin-top">
               <BillTitle title={bill.name} />
 
               <BillDate
