@@ -1,10 +1,61 @@
 import firebase from 'firebase'
-import { createBill, getBills, updateBill } from './firebaseService';
+
+import {
+  createBill,
+  getBills,
+  getFlatmates,
+  updateBill
+} from './firebaseService';
 
 import { Creators as LatestBillsCreators } from '../../LatestBills/actions/actions';
 import { Creators as BillFormCreators } from '../../BillFormNew/actions/actions';
+import { Creators as FlatmateCreators } from '../../Flatmates/actions/actions';
 
 jest.mock('firebase')
+
+describe('When successfully getting flatmates from firebase', () => {
+  let dispatch = jest.fn()
+
+  beforeAll(() => {
+    firebase.database = () => ({
+      ref: () => ({
+        once: () => Promise.resolve({ val: jest.fn(() => [{ name: 'your mum'}]) })
+      })
+    })
+
+    getFlatmates()(dispatch)
+  })
+
+  it('should dispatch an action before attempting to fetch the bills', () => {
+    expect(dispatch).toHaveBeenCalledWith(FlatmateCreators.getFlatmatesAttempt())
+  })
+
+  it('should dispatch an action after successfully getting the bills', () => {
+    expect(dispatch).toHaveBeenCalledWith(FlatmateCreators.getFlatmatesSuccess([{ name: 'your mum'}]))
+  })
+})
+
+describe('When failing to get flatmates from firebase', () => {
+  let dispatch = jest.fn()
+
+  beforeAll(() => {
+    firebase.database = () => ({
+      ref: () => ({
+        once: () => Promise.reject('he deaded')
+      })
+    })
+
+    getFlatmates()(dispatch)
+  })
+
+  it('should dispatch an action before attempting to fetch the bills', () => {
+    expect(dispatch).toHaveBeenCalledWith(FlatmateCreators.getFlatmatesAttempt())
+  })
+
+  it('should dispatch an action after successfully getting the bills', () => {
+    expect(dispatch).toHaveBeenCalledWith(FlatmateCreators.getFlatmatesFailure('he deaded'))
+  })
+})
 
 describe('When successfully creating a bill in firebase', () => {
   let dispatch = jest.fn()

@@ -2,6 +2,17 @@ import firebase from 'firebase'
 
 import { Creators as LatestBillsCreators } from '../../LatestBills/actions/actions';
 import { Creators as BillFormCreators } from '../../BillFormNew/actions/actions';
+import { Creators as FlatmateCreators } from '../../Flatmates/actions/actions';
+
+export const getFlatmates = () => {
+  return dispatch => {
+    dispatch(FlatmateCreators.getFlatmatesAttempt())
+
+    firebase.database().ref('flatmates').once('value')
+      .then(snapshot => dispatch(FlatmateCreators.getFlatmatesSuccess(snapshot.val())))
+      .catch(err => dispatch(FlatmateCreators.getFlatmatesFailure(err)))
+  }
+}
 
 export const createBill = (newBill) => {
   return dispatch => {
