@@ -6,16 +6,9 @@ import thunk from 'redux-thunk';
 import firebase from 'firebase'
 
 import App from './app/App'
-import { reducers } from './app/Core'
+import { firebaseConfig, reducers } from './app/Core'
 
-firebase.initializeApp({
-  apiKey: "AIzaSyCBC7D-589zHcKxZu7GeAie2QeD15aPO7c",
-  authDomain: "flatmatebills.firebaseapp.com",
-  databaseURL: "https://flatmatebills.firebaseio.com",
-  projectId: "flatmatebills",
-  storageBucket: "",
-  messagingSenderId: "408329859921"
-})
+firebase.initializeApp(firebaseConfig(process.env.NODE_ENV))
 
 const store = createStore(
   reducers,

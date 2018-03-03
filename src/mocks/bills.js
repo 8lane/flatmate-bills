@@ -9,7 +9,6 @@ export default [
     datePaid: null,
     archived: false,
     numberOfSplitSegments: 0,
-    segmentsIsPaid: false,
     segmentsCurrentBalance: 0,
     segments: [
       {
@@ -48,7 +47,6 @@ export default [
     datePaid: null,
     archived: false,
     numberOfSplitSegments: 0,
-    segmentsIsPaid: false,
     segmentsCurrentBalance: 36.66666666666667,
     segments: [
       {
@@ -81,7 +79,6 @@ export default [
     datePaid: null,
     archived: false,
     numberOfSplitSegments: 1,
-    segmentsIsPaid: false,
     segmentsCurrentBalance: 0,
     segments: [
       {
