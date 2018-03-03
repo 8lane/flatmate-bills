@@ -9,14 +9,10 @@ import 'uikit/dist/css/uikit.css'
 import './App.css'
 
 import { Creators as BillFormNewCreators } from './BillFormNew/actions/actions';
-
-import { LatestBills } from './LatestBills/containers'
-import { BillFormNew } from './BillFormNew/containers'
-
 import { AppTitle } from './Common'
-
-import { getFlatmates } from './Flatmates/services'
-import { getBills } from './LatestBills/services'
+import { BillFormNew } from './BillFormNew/containers'
+import { LatestBills } from './LatestBills/containers'
+import { getBills, getFlatmates } from './Core/services/firebaseService'
 
 window.moment = require('moment')
 window.UIkit = UIkit

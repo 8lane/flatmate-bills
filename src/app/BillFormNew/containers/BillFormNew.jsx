@@ -7,7 +7,7 @@ import 'react-dates/lib/css/_datepicker.css';
 
 import { SingleDatePicker, DateRangePicker } from 'react-dates';
 
-import { createBill } from '../services'
+import { createBill } from '../../Core/services/firebaseService'
  
 import { Creators } from '../../BillFormNew/actions/actions';
 import { Creators as LatestBillsCreators } from '../../LatestBills/actions/actions';
