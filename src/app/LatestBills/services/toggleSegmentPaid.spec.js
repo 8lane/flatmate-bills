@@ -1,11 +1,11 @@
 import { round } from '../../Helpers/Prices'
 
 import { Creators } from '../../LatestBills/actions/actions'
-import { updateBill } from '../services'
+import { updateBill } from '../../Core/services/firebaseService'
 
 import toggleSegmentPaid from './toggleSegmentPaid'
 
-jest.mock('../services', () => ({
+jest.mock('../../Core/services/firebaseService', () => ({
   updateBill: jest.fn()
 }))
 

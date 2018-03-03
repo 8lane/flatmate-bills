@@ -16,7 +16,7 @@ import { BillFormNew } from './BillFormNew/containers'
 import { AppTitle } from './Common'
 
 import { getFlatmates } from './Flatmates/services'
-import { getBills } from './LatestBills/services'
+import { getBills } from './Core/services/firebaseService'
 
 window.moment = require('moment')
 window.UIkit = UIkit

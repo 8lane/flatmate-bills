@@ -2,7 +2,17 @@ import firebase from 'firebase'
 
 import { Creators } from '../../LatestBills/actions/actions';
 
-export default (updatedBill, originalBill) => {
+export const getBills = () => {
+  return dispatch => {
+    dispatch(Creators.getBillsAttempt())
+
+    firebase.database().ref('bills').once('value')
+      .then(snapshot => dispatch(Creators.getBillsSuccess(snapshot.val())))
+      .catch(err => dispatch(Creators.getBillsFailure(err)))
+  }
+}
+
+export const updateBill = (updatedBill, originalBill) => {
   return dispatch => {
     dispatch(Creators.updateBillAttempt())
 

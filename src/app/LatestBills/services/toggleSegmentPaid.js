@@ -1,5 +1,5 @@
 import { Creators } from '../../LatestBills/actions/actions';
-import { updateBill } from '../services'
+import { updateBill } from '../../Core/services/firebaseService'
 
 export default (bills, billIndex, flatmateId) => {
   return dispatch => {
