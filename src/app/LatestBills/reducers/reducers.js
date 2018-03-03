@@ -12,7 +12,7 @@ const toggleSegmentPaid = (state, action) => state.merge({ latestBills: action.u
 const deleteBill = (state, action) => state.merge({ latestBills: state.latestBills.filter(bill => bill.id !== action.billId) })
 
 const getBillsAttempt = (state) => state.merge({ gettingBills: true })
-const getBillsSuccess = (state, action) => state.merge({ gettingBills: false, latestBills: action.bills })
+const getBillsSuccess = (state, action) => state.merge({ gettingBills: false, latestBills: action.bills || [] })
 const getBillsFailure = (state, action) => state.merge({ gettingBills: false, error: action.error })
 
 const updateBillAttempt = (state) => state.merge({ updatingBill: true })
