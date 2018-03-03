@@ -38,7 +38,7 @@ describe('When showing the latest bills', () => {
     })
 
     it('should show a placeholder', () => {
-      expect(LatestBillsComponent.text()).toEqual('No bills added yet!')
+      expect(LatestBillsComponent.text()).toEqual('No bills added yet 🤔')
     })
   })
 })
