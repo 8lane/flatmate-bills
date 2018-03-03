@@ -17,7 +17,7 @@ class LatestBills extends React.Component {
   render() {
     const { gettingBills, latestBills, flatmates, onBillDelete, onToggleSegmentPaid } = this.props
 
-    const sortedBills = [].concat(latestBills).sort((a, b) => a.id < b.id)
+    const sortedBills = [].concat(latestBills).sort((a, b) => a.dateDue < b.dateDue)
   
     return (
       <ul className="latest-bills uk-list uk-list-large">
