@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const BaseConfig = require('./webpack.base.config')
 
 module.exports = Object.assign({}, BaseConfig, {
@@ -13,6 +14,7 @@ module.exports = Object.assign({}, BaseConfig, {
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin('vendor'),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
@@ -23,7 +25,8 @@ module.exports = Object.assign({}, BaseConfig, {
       DEBUG: false
     }),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    //new BundleAnalyzerPlugin()
   ],
   stats: {
     colors: true

@@ -38,6 +38,7 @@ module.exports = Object.assign({}, BaseConfig, {
     ]
   }),
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin('vendor'),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)

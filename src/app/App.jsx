@@ -2,9 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import firebase from 'firebase'
 
-import UIkit from 'uikit';
-import Icons from 'uikit/dist/js/uikit-icons';
-
 import 'uikit/dist/css/uikit.css'
 import './App.css'
 
@@ -15,8 +12,6 @@ import { LatestBills } from './LatestBills/containers'
 import { getBills, getFlatmates } from './Core/services/firebaseService'
 
 window.moment = require('moment')
-window.UIkit = UIkit
-UIkit.use(Icons);
 
 class App extends React.Component {
   componentDidMount() {
@@ -37,9 +32,9 @@ class App extends React.Component {
             onClick={() => this.props.onToggleVisibility(!this.props.isEditing)}
           >
             {!this.props.isEditing ?
-              <span uk-icon="icon: plus; ratio: 2"></span>
+              <svg width="40" height="40" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" ratio="2"> <rect x="9" y="1" width="1" height="17"></rect> <rect x="1" y="9" width="17" height="1"></rect></svg>
             :
-              <span uk-icon="icon: close; ratio: 2"></span>
+              <svg width="40" height="40" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" ratio="2"> <path fill="none" stroke="#000" stroke-width="1.06" d="M16,16 L4,4"></path> <path fill="none" stroke="#000" stroke-width="1.06" d="M16,4 L4,16"></path></svg>
             }
           </button>
         </h1>

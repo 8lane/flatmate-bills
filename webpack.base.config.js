@@ -4,6 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     app: './src/index.js',
+    vendor: ['react', 'react-dom', 'react-redux', 'firebase', 'moment']
   },
   module: {
     rules: [
